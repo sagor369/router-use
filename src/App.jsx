@@ -2,10 +2,13 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigation } from 'react-router-dom'
+import ActiveLink from './components/ActiveLink/ActiveLink'
 
 function App() {
   const [count, setCount] = useState(0)
+  const navigation = useNavigation()
+
 
   return (
     <div className="App">
@@ -25,12 +28,16 @@ function App() {
         
       </div>
       <div className='nav-bar'> 
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/posts">Posts</Link>
-        <Link to="/friends">Friends</Link>
+        <ActiveLink to="/">Home</ActiveLink>
+        <ActiveLink to="/about">About</ActiveLink>
+        <ActiveLink to="/posts">Posts</ActiveLink>
+        <ActiveLink to="/friends">Friends</ActiveLink>
 
       </div>
+      <div>
+        {navigation.state === 'loading' ? 'Loading .....' : ''}
+      </div>
+
       <Outlet></Outlet>
     </div>
   )
